@@ -1,4 +1,8 @@
-install: dotfiles vim
+install: submodules dotfiles vim
+
+submodules:
+	git submodule init
+	git submodule update
 
 vim:
 	make -C myvim
