@@ -1,0 +1,75 @@
+# List the colors to use in the prompt for users on specifyed host.
+# The colors is defined as:
+#  - special
+#    0 normal font
+#    1 bold font
+#    7 inversed colors
+#  - bg-color
+#  - fg-color
+# The colors that could be used are shown by the script rainbow
+
+# The following 4 lines will help you test the prompts.
+# Just run ./.PS_COL to get test printouts of all prompts.
+sed -n -e 's/\(^[a-z]*:[^ ]*\) *\([0-9;]*\) \([0-9;]*\)/echo "\\e[\2mulf@vallrun\\e[0m:\\e[\3m\/var\/log(0)\\e[0m$  \1"/p' $0 > /tmp/ps_col_test
+. /tmp/ps_col_test
+rm /tmp/ps_col_test
+exit
+
+# Workstations in ostersund
+ulf:hovermo.favoptic.com    1;40;32 1;40;35
+root:hovermo.favoptic.com   1;41;32 1;40;35
+ulf:mogren                  1;40;32 1;40;35
+root:mogren                 1;41;32 1;40;35
+
+ulf:black.favoptic.com      1;40;30 1;40;34
+root:black.favoptic.com     1;41;30 1;41;34
+
+ulf:gunde.favoptic.com      1;40;33 1;40;34
+root:gunde.favoptic.com     1;41;33 1;41;34
+
+ulf:ruby.favoptic.com       1;40;35 1;40;34
+root:ruby.favoptic.com      1;41;35 1;41;34
+
+
+ulf:lembit.favoptic.com     1;40;31 1;40;33
+root:lembit.favoptic.com    1;41;31 1;41;33
+
+ulf:lensbuddy.com           1;40;33 1;40;33
+root:lensbuddy.com          1;41;33 1;41;33
+lensbuddy:lensbuddy.com     1;46;33 1;40;33
+
+ulf:purple.favoptic.com     1;40;35 1;40;33
+root:purple.favoptic.com    1;41;35 1;41;33
+
+ulf:fav-test.favoptic.com   1;40;36 1;40;33
+root:fav-test.favoptic.com  1;41;36 1;41;33
+ulf:fav-test.favoptic.se    1;40;36 1;40;33
+root:fav-test.favoptic.se   1;41;36 1;41;33
+
+ulf:titanic.favoptic.com    1;40;37 1;40;33
+root:titanic.favoptic.com   1;41;37 1;41;33
+
+ulf:Master.secured          1;40;31 1;40;31
+root:Master.secured         1;41;30 1;41;30
+
+ulf:serv1u.favoptic.com     1;42;31 1;40;33
+root:serv1u.favoptic.com    1;45;33 1;45;33
+
+# Comuters at pio
+ulf:fav-www1.favoptic.com   1;46;30 1;40;31
+root:fav-www1.favoptic.com  1;41;30 1;40;31
+
+ulf:fav-www2.favoptic.com   1;46;31 1;40;31
+root:fav-www2.favoptic.com  1;41;32 1;40;31
+
+ulf:fav-aid1.favoptic.com   1;46;33 1;40;31
+root:fav-aid1.favoptic.com  1;41;33 1;40;31
+
+ulf:fav-db1.favoptic.com    1;46;35 1;40;31
+root:fav-db1.favoptic.com   1;41;36 1;40;31
+
+ulf:fav-db2.favoptic.com    1;46;37 1;40;31
+root:fav-db2.favoptic.com   1;41;37 1;40;31
+
+ulf:fav-tele1.favoptic.com  1;43;34 1;40;31
+root:fav-tele1.favoptic.com 1;41;34 1;40;31
