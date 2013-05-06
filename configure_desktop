@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# A useful posts of how how to show how to work with the settings on the
+# commandline
+#   http://mygeekopinions.blogspot.se/2011/09/how-to-edit-compiz-settings-in-ubuntu.html
+#   http://askubuntu.com/a/39867/31749
+#
+# How to reset options, ex:
+#   gconftool --recursive-unset /apps/gnome-terminal
+
+
+# =========================================================================
+# Compiz settings (Ubuntu 3D):
+# =========================================================================
+
+# Set desktop size:
+gconftool --set /apps/compiz-1/general/screen0/options/hsize --type=int 3
+gconftool --set /apps/compiz-1/general/screen0/options/vsize --type=int 3
+
+# Make the desktop switching be faster
+gconftool --set /apps/compiz-1/plugins/wall/screen0/options/slide_duration --type=float 0
+gconftool --set /apps/compiz-1/plugins/wall/screen0/options/preview_timeout --type=float 0
+
+# =========================================================================
+# Metacity settings (Ubuntu 2D):
+# =========================================================================
+
+# Set desktop size:
+gconftool --set /apps/metacity/general/num_workspaces --type=int 9
+
+# Key bindings
+gconftool --set /apps/metacity/window_keybindings/maximize_vertically --type=string "<Alt>x"
+gconftool --set /apps/metacity/window_keybindings/toggle_maximized --type=string "<Alt>z"
+gconftool --set /apps/metacity/keybinding_commands/command_1 --type=string "xterm"
+gconftool --set /apps/metacity/global_keybindings/run_command_1 --type=string "<Mod5>F9"
+gconftool --set /apps/metacity/keybinding_commands/command_2 --type=string "/home/ulf/bin/open_xterminals"
+gconftool --set /apps/metacity/global_keybindings/run_command_2 --type=string "<Mod5>F8"
+
+
+# =========================================================================
+# General
+# =========================================================================
+
+# Set gnome-terminal in right mode (to what I like)
+gconftool --set /apps/gnome-terminal/profiles/Default/default_show_menubar --type=bool false
+gconftool --set /apps/gnome-terminal/profiles/Default/use_theme_colors --type=bool false
+gconftool --set /apps/gnome-terminal/profiles/Default/foreground_color --type=string "#FFFFFF"
+gconftool --set /apps/gnome-terminal/profiles/Default/background_color --type=string "#000000"
+gconftool --set /apps/gnome-terminal/profiles/Default/palette --type=string "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+gconftool --set /apps/gnome-terminal/profiles/Default/use_system_font --type=bool false
+gconftool --set /apps/gnome-terminal/profiles/Default/font --type=string "Terminus 8"
+gconftool --set /apps/gnome-terminal/profiles/Default/scrollback_lines --type=int 5120
+gconftool --set /apps/gnome-terminal/keybindings/full_screen --type=string disabled
+
+# Silence the bell
+gconftool --set --type bool /apps/metacity/general/audible_bell false
+
+# Disable the anoying auto-maximise. See:
+#   https://bugs.launchpad.net/ayatana-design/+bug/797808
+gconftool --set --type bool /apps/metacity/general/auto_maximize_windows false
+
+## To add more window handling functionality I need to develop a nifty
+## script. Use wmctrl:
+##   http://spiralofhope.com/wmctrl.html
