@@ -11,3 +11,5 @@ dotfiles:
 	ln -sfn ${CURDIR}/PS_COL   ~/.PS_COL
 	ln -sfn ${CURDIR}/bashrc   ~/.bashrc
 	ln -sfn ${CURDIR}/screenrc ~/.screenrc
+	ln -sfn ${CURDIR}/Xdefaults ~/.Xdefaults
+	ln -sfn ${CURDIR}/Xdefaults ~/.Xresources

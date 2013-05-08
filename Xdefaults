@@ -1,0 +1,35 @@
+/*
+# Kör xcolorsel för att se vilka färger som finns att välja på.
+# man XTerm för att se vilka färger som är default
+# 0-7 är bg
+# 8-15 är fg
+# Ladda om filen med xrdb .Xdefaults
+*/
+XTerm*color0:           black
+XTerm*color1:           red
+XTerm*color2:           green1
+XTerm*color3:           orange
+XTerm*color4:           DeepSkyBlue
+XTerm*color5:           magenta1
+XTerm*color6:           cyan1
+XTerm*color7:           gray90
+XTerm*color8:           gray30
+XTerm*color9:           red
+XTerm*color10:          green
+XTerm*color11:          yellow1
+XTerm*color12:          DodgerBlue1
+XTerm*color13:          magenta
+XTerm*color14:          cyan
+XTerm*color15:          white
+
+XTerm*background:       Black
+XTerm*foreground:       White
+XTerm*saveLines:        5000
+
+XTerm*eightBitInput:    false
+XTerm*eightBitOutput:   false
+XTerm*eightBitControl:  false
+XTerm*metaSendsEscape:  false
+
+XTerm*visualBell:       false
+XTerm*visualBell:       false
