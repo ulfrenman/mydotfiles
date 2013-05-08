@@ -35,6 +35,8 @@ gconftool --set /apps/metacity/keybinding_commands/command_1 --type=string "xter
 gconftool --set /apps/metacity/global_keybindings/run_command_1 --type=string "<Mod5>F9"
 gconftool --set /apps/metacity/keybinding_commands/command_2 --type=string "/home/ulf/bin/open_xterminals"
 gconftool --set /apps/metacity/global_keybindings/run_command_2 --type=string "<Mod5>F8"
+gconftool --set /apps/metacity/keybinding_commands/command_3 --type=string "/home/ulf/bin/open_xterminals_on_mogren"
+gconftool --set /apps/metacity/global_keybindings/run_command_3 --type=string "<Mod5>F7"
 
 
 # =========================================================================

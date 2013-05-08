@@ -18,8 +18,8 @@ exit
 # Workstations in ostersund
 ulf:hovermo.favoptic.com    1;40;32 1;40;35
 root:hovermo.favoptic.com   1;41;32 1;40;35
-ulf:mogren                  1;40;32 1;40;35
-root:mogren                 1;41;32 1;40;35
+ulf:mogren.favoptic.com     1;40;32 1;40;35
+root:mogren.favoptic.com    1;41;32 1;40;35
 
 ulf:black.favoptic.com      1;40;30 1;40;34
 root:black.favoptic.com     1;41;30 1;41;34
