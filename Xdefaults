@@ -32,4 +32,9 @@ XTerm*eightBitControl:  false
 XTerm*metaSendsEscape:  false
 
 XTerm*visualBell:       false
-XTerm*visualBell:       false
+
+
+xload*highlight:        red
+xload*showLabel:        false
+xload*update:           1
+xload*Geometry:         300x25
