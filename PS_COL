@@ -73,3 +73,12 @@ root:fav-db2.favoptic.com   1;41;37 1;40;31
 
 ulf:fav-tele1.favoptic.com  1;43;34 1;40;31
 root:fav-tele1.favoptic.com 1;41;34 1;40;31
+
+ulf:fritz                   1;40;36 1;40;35
+root:fritz                  1;41;36 1;41;33
+                            
+ulf:plattis                 1;40;34 1;40;33
+root:plattis                1;41;34 1;41;33
+                            
+ulf:plex                    1;40;32 1;40;33
+root:plex                   1;41;32 1;41;33
