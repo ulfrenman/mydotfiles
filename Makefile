@@ -13,3 +13,4 @@ dotfiles:
 	ln -sfn ${CURDIR}/screenrc ~/.screenrc
 	ln -sfn ${CURDIR}/Xdefaults ~/.Xdefaults
 	ln -sfn ${CURDIR}/Xdefaults ~/.Xresources
+	ln -sfn ${CURDIR}/gitconfig ~/.gitconfig

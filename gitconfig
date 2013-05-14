@@ -1,0 +1,10 @@
+[user]
+	email = ulf.renman@gmail.com
+	name = Ulf Renman
+[core]
+	excludesfile = /home/ulf/.gitglobalexclude
+[color]
+	ui = true
+[alias]
+	st = status
+	di = diff
