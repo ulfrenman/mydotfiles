@@ -1,4 +1,4 @@
-install: submodules dotfiles vim
+install: submodules update_modules dotfiles vim
 
 submodules:
 	git submodule init
@@ -14,3 +14,6 @@ dotfiles:
 	ln -sfn ${CURDIR}/Xdefaults ~/.Xdefaults
 	ln -sfn ${CURDIR}/Xdefaults ~/.Xresources
 	ln -sfn ${CURDIR}/gitconfig ~/.gitconfig
+
+update_modules:
+	git submodule foreach git pull origin master
