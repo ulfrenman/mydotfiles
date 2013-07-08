@@ -37,6 +37,13 @@ gconftool --set /apps/metacity/keybinding_commands/command_2 --type=string "/hom
 gconftool --set /apps/metacity/global_keybindings/run_command_2 --type=string "<Mod5>F8"
 gconftool --set /apps/metacity/keybinding_commands/command_3 --type=string "/home/ulf/bin/open_xterminals_on_mogren"
 gconftool --set /apps/metacity/global_keybindings/run_command_3 --type=string "<Mod5>F7"
+# Spotify keybindings (https://code.google.com/p/spotify-notify/)
+gconftool --set /apps/metacity/keybinding_commands/command_4 --type=string "/home/ulf/bin/spotify-notify.py -a playPause"
+gconftool --set /apps/metacity/global_keybindings/run_command_4 --type=string "XF86AudioPlay"
+gconftool --set /apps/metacity/keybinding_commands/command_5 --type=string "/home/ulf/bin/spotify-notify.py -a next"
+gconftool --set /apps/metacity/global_keybindings/run_command_5 --type=string "XF86AudioNext"
+gconftool --set /apps/metacity/keybinding_commands/command_6 --type=string "/home/ulf/bin/spotify-notify.py -a previous"
+gconftool --set /apps/metacity/global_keybindings/run_command_6 --type=string "XF86AudioPrev"
 
 
 # =========================================================================
@@ -64,3 +71,5 @@ gconftool --set --type bool /apps/metacity/general/auto_maximize_windows false
 ## To add more window handling functionality I need to develop a nifty
 ## script. Use wmctrl:
 ##   http://spiralofhope.com/wmctrl.html
+
+
