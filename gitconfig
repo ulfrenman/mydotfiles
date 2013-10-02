@@ -8,3 +8,13 @@
 [alias]
 	st = status
 	di = diff
+    ; List the commited changes that has not been pushed to the svn-repo. It
+    ; accepts most of the normal log-options. It could be used like this:
+    ;   ## In current branch
+    ;   $ git dlog
+    ;   ## In some other branch
+    ;   $ git dlog some_other_branch
+    ;   ## Show stat or codechange also
+    ;   $ git dlog --stat
+    ;   $ git dlog -p
+    dlog = "!sh -c 'echo -----------------------------------------; echo Uncomitted to main svn-repo ; echo -----------------------------------------; git log HEAD~`git svn dcommit -n | grep diff | wc -l`.. $@'" -
