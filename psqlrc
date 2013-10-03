@@ -1,0 +1,24 @@
+-- Some configuration of how psql behave. A good starter:
+--   http://www.craigkerstiens.com/2013/02/21/more-out-of-psql/
+
+-- Turn off autocommit and make transaction errors rollback just the last
+-- statement.
+\set AUTOCOMMIT OFF
+\set ON_ERROR_ROLLBACK interactive
+
+-- Print timing info after each query
+\timing
+
+-- Make the prompt red and bold
+\set PROMPT1 '%001%[%033[1;31;40m%]%002%/%R%001%[%033[0m%]%002%x%x%# '
+
+-- Alias
+\set show_slow_queries 'SELECT (total_time / 1000 / 60) as total_minutes, (total_time/calls) as average_time, query, calls FROM pg_stat_statements ORDER BY 1 DESC LIMIT 100;'
+
+-- Wrong place to put this I guess but I know I will find it here when I miss
+-- it:
+--   To run a query directly from within a vim-session do something like:
+--     :w !psql eyedb
+--     :'<,'>w !psql eyedb
+--  In a psql-session I could edit the last query with vim with:
+--     \e
