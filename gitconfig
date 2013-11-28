@@ -8,6 +8,8 @@
 [alias]
 	st = status
 	di = diff
+    vimdiff = difftool -t vimdiff
+    tkdiff = difftool -t tkdiff
     ; List the commited changes that has not been pushed to the svn-repo. It
     ; accepts most of the normal log-options. It could be used like this:
     ;   ## In current branch
