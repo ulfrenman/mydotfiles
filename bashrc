@@ -14,11 +14,14 @@ shopt -s execfail
 
 PATH="/usr/local/bin:/usr/bin:/bin"
 PATH="${PATH}:/usr/bin/X11:/usr/games"
-PATH="${PATH}:~/bin"
-PATH="${PATH}:~/.gem/ruby/1.8/bin"
+PATH="${PATH}:/home/ulf/bin"  # Do not rely on ~ (see: http://stackoverflow.com/q/32199176/42580)
+PATH="${PATH}:/home/ulf/.gem/ruby/1.8/bin"
 
 export PATH="${PATH}:/sbin:/usr/sbin"
 export HISTIGNORE=" *:&"
+# HISTTIMEFORMAT seems like a nice thing:
+#   http://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
+export HISTTIMEFORMAT='%F %T: '
 
 export PAGER=`which less`
 export EDITOR=`which vim`
@@ -28,7 +31,7 @@ export PS_FORMAT="pid,euser,stat,bsdtime,vsz,sz,command"
 export SVNTRUNK='svn+ssh://svn.lensbuddy.se/opt/subversion/main/trunk'
 export SVNBRANCH='svn+ssh://svn.lensbuddy.se/opt/subversion/main/branches'
 #export PYTHONPATH='/home/ulf/gitcopy/modules'
-export PYTHONPATH='/storage/_favoptic/modules/live'
+export PYTHONPATH='/storage/_favoptic/modules'
 # Needed by ~/.vim/plugin/gnupg.vim
 export GPG_TTY=`tty`
 
@@ -41,15 +44,23 @@ if [ -z "$PS_COL1" -a $(id -un) = 'root' ]; then PS_COL1="1;41;37"; fi
 if [ -z $PS_COL1 ]; then PS_COL1="1;47;30"; fi
 if [ -z $PS_COL2 ]; then PS_COL2="1;40;37"; fi
 
+function venv_info()
+{
+    # Add virtualenv info to prompt if its activated. See:
+    #   http://stackoverflow.com/questions/14987013/
+    if [ "$VIRTUAL_ENV" != "" ]; then
+        echo "\[\e[1;41;30m\](`basename \"$VIRTUAL_ENV\"`)\[\e[0m\]"
+    fi
+}
 function longprompt()
 {
   local rc=$?
-  export PS1="\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]\w($rc)\[\e[0m\]\\$ "
+  export PS1="\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]\w($rc)$(venv_info)\[\e[0m\]\\$ "
 }
 function shortprompt()
 {
   local rc=$?
-  export PS1="\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]($rc)\[\e[0m\]\\$ "
+  export PS1="\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]($rc)$(venv_info)\[\e[0m\]\\$ "
 }
 
 function screenprompt()
@@ -77,6 +88,7 @@ alias lp='PROMPT_COMMAND=longprompt'
 alias sulb='sudo -u lensbuddy'
 alias sufo='sudo -u favoptic'
 alias kf="kill \`ps | grep firefox-bin | grep -v grep | awk '{print \$1}'\`"
+alias gqview='echo "Run geegie instead"'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
