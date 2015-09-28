@@ -15,6 +15,7 @@ dotfiles:
 	ln -sfn ${CURDIR}/Xdefaults ~/.Xresources
 	ln -sfn ${CURDIR}/gitconfig ~/.gitconfig
 	ln -sfn ${CURDIR}/psqlrc ~/.psqlrc
+	ln -sfn ${CURDIR}/xprofile ~/.xprofile
 
 update_modules:
 	git submodule foreach git pull origin master

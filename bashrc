@@ -121,7 +121,3 @@ svn() {
         ;;
     esac
 } 
-
-if [ $(hostname -f) == "hovermo.favoptic.com" ]; then
-    export GPGKEY=4249FA82
-fi

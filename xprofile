@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# För att få keyring att funka fint med awesome
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+export GNOME_KEYRING_PID
+export GNOME_KEYRING_CONTROL
+# För att göra så att mina cron-job kan hitta nyckelknippan så sparar vi
+# SSH_AUTH_SOCK i en fil som sen "sourceas" i de cronjob som behöver den.
+echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
+echo "# Generated from ~/.xprofile" >> ~/.ssh-agent
+
+# För att få lite fart på tangentbordet
+xset r rate 300 50
+
+# Jag har två skärmar. På detta sätt sätter jag dom i rätt ordning
+xrandr --output VGA1 --mode 1280x1024 --right-of HDMI1
+
+# Starta screensaver demonen
+xscreensaver -nosplash &
+
+# Start things
+google-chrome &
+psi-plus --status=online &
+volumeicon &
