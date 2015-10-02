@@ -87,7 +87,7 @@ tags = {
                  layouts[2], layouts[2], layouts[2], layouts[2] }
     },
     { names  = { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
-      layout = { layouts[2], layouts[1], layouts[2], layouts[2], layouts[2],
+      layout = { layouts[2], layouts[2], layouts[2], layouts[2], layouts[2],
                  layouts[2], layouts[2], layouts[2], layouts[2] }
     }
 }}
@@ -414,12 +414,12 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
-    -- Set Chrome to always map on tags number 2 of screen 2 (left-screen).
+    -- Set Firefox to always map on tags number 2 of screen 2.
+     { rule = { class = "Firefox" },
+       properties = { tag = tags[2][2] } },
+    -- Set Chrome to always map on tags number 3 of screen 2 (left-screen).
     { rule = { class = "Google-chrome" },
-      properties = { tag = tags[2][2] } },
+      properties = { tag = tags[2][3] } },
     -- Set PSI to always map on tags number 1 of screen 1 (right-screen).
     { rule = { class = "Psi-plus" },
       properties = { tag = tags[1][1] } },
