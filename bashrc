@@ -52,15 +52,25 @@ function venv_info()
         echo "\[\e[1;41;30m\](`basename \"$VIRTUAL_ENV\"`)\[\e[0m\]"
     fi
 }
+
+# If you in some environments/cases whant to prepend your prompt with
+# something, then set PS_PREFIX like so:
+#   $ export PS_PREFIX=SOME_MSG
 function longprompt()
 {
   local rc=$?
-  export PS1="\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]\w($rc)$(venv_info)\[\e[0m\]\\$ "
+  if [ -n "$PS_PREFIX" ]; then
+    local PRE="\[\e[1;41;32m\](${PS_PREFIX})\[\e[0m\]"
+  fi
+  export PS1="${PRE}\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]\w($rc)$(venv_info)\[\e[0m\]\\$ "
 }
 function shortprompt()
 {
   local rc=$?
-  export PS1="\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]($rc)$(venv_info)\[\e[0m\]\\$ "
+  if [ -n "$PS_PREFIX" ]; then
+    local PRE="\[\e[1;41;32m\](*)\[\e[0m\]"
+  fi
+  export PS1="${PRE}\[\e[${PS_COL1}m\]\u@\h\[\e[0m\]:\[\e[${PS_COL2}m\]($rc)$(venv_info)\[\e[0m\]\\$ "
 }
 
 function screenprompt()
