@@ -59,8 +59,8 @@ root:serv1u.favoptic.com    1;45;33 1;45;33
 ulf:fav-www1.favoptic.com   1;46;30 1;40;31
 root:fav-www1.favoptic.com  1;41;30 1;40;31
 
-ulf:fav-www2.favoptic.com   1;46;31 1;40;31
-root:fav-www2.favoptic.com  1;41;32 1;40;31
+ulf:www3.favoptic.com       1;46;31 1;40;31
+root:www3.favoptic.com      1;41;32 1;40;31
 
 ulf:fav-aid1.favoptic.com   1;46;33 1;40;31
 root:fav-aid1.favoptic.com  1;41;33 1;40;31
@@ -71,8 +71,8 @@ root:fav-db1.favoptic.com   1;41;36 1;40;31
 ulf:fav-db2.favoptic.com    1;46;37 1;40;31
 root:fav-db2.favoptic.com   1;41;37 1;40;31
 
-ulf:fav-tele1.favoptic.com  1;43;34 1;40;31
-root:fav-tele1.favoptic.com 1;41;34 1;40;31
+ulf:sync3.favoptic.com      1;43;34 1;40;31
+root:sync3.favoptic.com     1;41;34 1;40;31
 
 ulf:fritz                   1;40;36 1;40;35
 root:fritz                  1;41;36 1;41;33
