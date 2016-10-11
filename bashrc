@@ -25,7 +25,6 @@ export HISTTIMEFORMAT='%F %T: '
 
 export PAGER=`which less`
 export EDITOR=`which vim`
-export GREP_OPTIONS='--color'
 export G_BROKEN_FILENAMES=1
 export PS_FORMAT="pid,euser,stat,bsdtime,vsz,sz,command"
 export SVNTRUNK='svn+ssh://svn.lensbuddy.se/opt/subversion/main/trunk'
@@ -95,10 +94,9 @@ alias dir='ls --color=auto -alF'
 alias ps='ps -elFH'
 alias sp='PROMPT_COMMAND=shortprompt'
 alias lp='PROMPT_COMMAND=longprompt'
-alias sulb='sudo -u lensbuddy'
-alias sufo='sudo -u favoptic'
 alias kf="kill \`ps | grep firefox-bin | grep -v grep | awk '{print \$1}'\`"
 alias gqview='echo "Run geegie instead"'
+alias grep='grep --color'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
