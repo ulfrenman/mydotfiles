@@ -55,6 +55,8 @@ function venv_info()
 # If you in some environments/cases whant to prepend your prompt with
 # something, then set PS_PREFIX like so:
 #   $ export PS_PREFIX=SOME_MSG
+ping -c1 -w1 192.168.100.35 > /dev/null 2>&1
+[ $? -eq 0 ] && export PS_PREFIX=TEST
 function longprompt()
 {
   local rc=$?
