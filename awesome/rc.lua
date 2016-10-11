@@ -278,13 +278,15 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Left",  function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "Right", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
+    awful.key({ modkey,           }, "Tab", function () awful.client.focus.byidx(  1) end),
+    awful.key({ modkey, "Shift"   }, "Tab", function () awful.client.focus.byidx( -1) end),
+    --awful.key({ modkey,           }, "Tab",
+        --function ()
+            --awful.client.focus.history.previous()
+            --if client.focus then
+                --client.focus:raise()
+            --end
+        --end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
@@ -326,6 +328,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop", false) end),
 
     -- Volume (from: https://wiki.gentoo.org/wiki/Awesome)
+    -- Find out what card to control (the -c param) with "cat /proc/asound/cards"
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c2 -q sset Headphone 2dB-") end),
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c2 -q sset Headphone 2dB+") end)
 )
