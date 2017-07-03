@@ -34,14 +34,9 @@ export PYTHONPATH='/storage/_favoptic/modules'
 # Needed by ~/.vim/plugin/gnupg.vim
 export GPG_TTY=`tty`
 
-# Get colorization from the file .PS_COL 
-PS_COL1=$(grep $(id -un):$(hostname -f) ~/.PS_COL | awk '{print $2}')
-PS_COL2=$(grep $(id -un):$(hostname -f) ~/.PS_COL | awk '{print $3}')
-
-# If no color is specified use thise defaults
-if [ -z "$PS_COL1" -a $(id -un) = 'root' ]; then PS_COL1="1;41;37"; fi
-if [ -z $PS_COL1 ]; then PS_COL1="1;47;30"; fi
-if [ -z $PS_COL2 ]; then PS_COL2="1;40;37"; fi
+# Get colorization from the file .PS_COL
+PS_COL1=$(~/.PS_COL -c1)
+PS_COL2=$(~/.PS_COL -c2)
 
 function venv_info()
 {
