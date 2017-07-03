@@ -16,7 +16,8 @@ dotfiles:
 	ln -sfn ${CURDIR}/gitconfig ~/.gitconfig
 	ln -sfn ${CURDIR}/psqlrc ~/.psqlrc
 	ln -sfn ${CURDIR}/xprofile ~/.xprofile
-	ln -sfn ${CURDIR}/awesome ~/.config/.
+	# Only insert awesome-link if .config exist
+	if [ -d ~/.config ]; then ln -sfn ${CURDIR}/awesome ~/.config/.; fi
 
 update_modules:
 	git submodule foreach git pull origin master
