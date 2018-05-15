@@ -12,8 +12,13 @@ require("debian.menu")
 
 -- More
 vicious = require("vicious")
+
+-- Logging. See http://neopallium.github.io/lualogging/
 require("logging.file")
 logger = logging.file("/home/ulf/awesome_rc_test_%s.log", "%Y-%m-%d")
+--logger:setLevel (logging.WARN)
+logger:setLevel (logging.DEBUG)
+logger:info('rc.lua was reread')
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -329,8 +334,26 @@ globalkeys = awful.util.table.join(
 
     -- Volume (from: https://wiki.gentoo.org/wiki/Awesome)
     -- Find out what card to control (the -c param) with "cat /proc/asound/cards"
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c2 -q sset Headphone 2dB-") end),
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c2 -q sset Headphone 2dB+") end)
+    awful.key({ }, "XF86AudioRaiseVolume",
+        function ()
+            local card = nil
+            for line in io.open('/proc/asound/cards'):lines() do
+                x = string.match(line,'^ (%d*) *.Headset')
+                if x then card = x end
+            end
+            logger:debug('Raising volume on Headset (card '..card..')')
+            awful.util.spawn("amixer -c"..card.." -q sset Headphone 2dB+")
+        end),
+    awful.key({ }, "XF86AudioLowerVolume",
+        function ()
+            local card = nil
+            for line in io.open('/proc/asound/cards'):lines() do
+                x = string.match(line,'^ (%d*) *.Headset')
+                if x then card = x end
+            end
+            logger:debug('Lowering volume on Headset (card '..card..')')
+            awful.util.spawn("amixer -c"..card.." -q sset Headphone 2dB-")
+        end)
 )
 
 clientkeys = awful.util.table.join(
