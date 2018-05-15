@@ -94,6 +94,9 @@ alias lp='PROMPT_COMMAND=longprompt'
 alias kf="kill \`ps | grep firefox-bin | grep -v grep | awk '{print \$1}'\`"
 alias gqview='echo "Run geegie instead"'
 alias grep='grep --color'
+# Help me add an agent when I log in from home or elsewere.
+alias ssh-add-agent='eval `ssh-agent`;ssh-add'
+alias sshaa=ssh-add-agent
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
