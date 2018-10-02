@@ -241,7 +241,8 @@ for s = 1, screen.count() do
         mytextclock,
         cpuwidget.widget,
         --ulftest,
-        s == 2 and mysystray or nil, -- screen 2 is my main BIG one
+        -- Only include mysystray on the main-screen (screen 2 is my main BIG one)
+        s == 2 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -441,14 +442,14 @@ awful.rules.rules = {
     { rule = { class = "gimp" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 2.
-     { rule = { class = "Firefox" },
-       properties = { tag = tags[2][2] } },
+     --{ rule = { class = "Firefox" },
+       --properties = { tag = tags[2][2] } },
     -- Set Chrome to always map on tags number 3 of screen 2 (left-screen).
-    { rule = { class = "Google-chrome" },
-      properties = { tag = tags[2][3] } },
+    --{ rule = { class = "Google-chrome" },
+      --properties = { tag = tags[2][3] } },
     -- Set PSI to always map on tags number 1 of screen 1 (right-screen).
-    { rule = { class = "Psi-plus" },
-      properties = { tag = tags[1][1] } },
+    --{ rule = { class = "Psi-plus" },
+      --properties = { tag = tags[1][1] } },
     -- Start windows as slave (from: http://awesome.naquadah.org/wiki/FAQ)
     { rule = { }, properties = { }, callback = awful.client.setslave },
 }
