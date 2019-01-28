@@ -243,6 +243,13 @@ awful.screen.connect_for_each_screen(function(s)
             s.mylayoutbox,
         },
     }
+
+    -- systray-widget can only exist once. So if there is only one screen then
+    -- it will be shown there. But if there are multiple screens it will be
+    -- moved to screen 2 (but no further) since 2 is my main screen.
+    if s.index == 2 then
+        wibox.widget.systray():set_screen(s)
+    end
 end)
 -- }}}
 
