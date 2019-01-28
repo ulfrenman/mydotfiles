@@ -46,6 +46,9 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+-- Instead of customizing a full theme I just tweek whats interesting to me.
+beautiful.border_normal = "#6060aa"
+beautiful.border_focus = "#dddddd"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
