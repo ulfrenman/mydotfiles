@@ -12,7 +12,6 @@ awesome-client:
     return "HelloWorld"
 
 Todo:
- * Cycle through all windows with <modkey>-<tab>
  * New windows should not be masters by default
  * If there is more than 1 screen, make first tag on screen 1 IM tag with
    floating layout
