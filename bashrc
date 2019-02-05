@@ -12,9 +12,11 @@ shopt -s no_empty_cmd_completion
 shopt -s xpg_echo
 shopt -s execfail
 
-PATH="/usr/local/bin:/usr/bin:/bin"
+# Start with /home/ulf/bin to make my own definitions (in bin/) take precedence
+# over those defined by the system.
+PATH="/home/ulf/bin"  # Do not rely on ~ (see: http://stackoverflow.com/q/32199176/42580)
+PATH="${PATH}:/usr/local/bin:/usr/bin:/bin"
 PATH="${PATH}:/usr/bin/X11:/usr/games"
-PATH="${PATH}:/home/ulf/bin"  # Do not rely on ~ (see: http://stackoverflow.com/q/32199176/42580)
 PATH="${PATH}:/home/ulf/.gem/ruby/1.8/bin"
 
 export PATH="${PATH}:/sbin:/usr/sbin"
