@@ -131,3 +131,5 @@ svn() {
         ;;
     esac
 } 
+export ARDUINO_DIR=/home/ulf/arduino_install/latest
+export ARDMK_DIR=/home/ulf/arduino_install/Arduino-Makefile
