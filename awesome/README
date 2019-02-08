@@ -1,0 +1,25 @@
+When I upgraded to Ubuntu 18.04 awesome was upgraded to v4.2 (where I think I
+was previously on v3.5). This introduced some issues for me. And while I was
+fixing them I gatherd some knowledge that I will try to compile here.
+
+Nice links:
+ * https://awesomewm.org/apidoc/documentation/05-awesomerc.md.html
+ * https://awesomewm.org/apidoc/documentation/17-porting-tips.md.html
+ * http://www.holgerschurig.de/tags/awesome/
+
+awesome-client:
+ * Use return instead of print:
+    return "HelloWorld"
+
+Todo:
+ * New windows should not be masters by default
+ * If there is more than 1 screen, make first tag on screen 1 IM tag with
+   floating layout
+ * Make gimp (and all its popups) always be floating by default
+ * Show window state somewere (in popup window or tasklist??),
+   beautiful.tasklist_plain_task_name seems to be related to this but I cant
+   get it working.
+ * Try testing and development using Xephyr:
+     https://awesomewm.org/doc/api/documentation/17-porting-tips.md.html
+ * Learn how to use awesome-client
+ * Learn some Lua

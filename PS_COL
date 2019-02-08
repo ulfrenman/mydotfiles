@@ -1,84 +1,217 @@
-# List the colors to use in the prompt for users on specifyed host.
-# The colors is defined as:
-#  - special
-#    0 normal font
-#    1 bold font
-#    7 inversed colors
-#  - bg-color
-#  - fg-color
-# The colors that could be used are shown by the script rainbow
+#!/usr/bin/env python
+"""A small prog to generate color-codes from hostname.
 
-# The following 4 lines will help you test the prompts.
-# Just run ./.PS_COL to get test printouts of all prompts.
-sed -n -e 's/\(^[a-z]*:[^ ]*\) *\([0-9;]*\) \([0-9;]*\)/echo "\\e[\2mulf@vallrun\\e[0m:\\e[\3m\/var\/log(0)\\e[0m$  \1"/p' $0 > /tmp/ps_col_test
-. /tmp/ps_col_test
-rm /tmp/ps_col_test
-exit
+The rational behind this is that I have a list of hosts where I have fixed
+colors set for the prompt. This is to help me distinguish the machines easily
+just by color. To further help me the prompt is set with a red background when
+running as root (red to indicate "danger").
 
-# Workstations in ostersund
-ulf:hovermo.favoptic.com    1;40;32 1;40;35
-root:hovermo.favoptic.com   1;41;32 1;40;35
-ulf:mogren.favoptic.com     1;40;32 1;40;35
-root:mogren.favoptic.com    1;41;32 1;40;35
+If the host hasn't been added to the list it used to default to black text on
+white background which is still a good choice.
 
-ulf:black.favoptic.com      1;40;30 1;40;34
-root:black.favoptic.com     1;41;30 1;41;34
+But to avoid the need to add every new host to the list to get a semi-unique
+colored prompt for it I instead use colors genetated from the hostname. This
+will give us a wider variations of prompts that is easier to recognise.
 
-ulf:gunde.favoptic.com      1;40;33 1;40;34
-root:gunde.favoptic.com     1;41;33 1;41;34
+root-prompt
+===========
+The root-prompt has a red background to indicate "danger". It is generated
+from the user colors by making the background red. If the combination of bg-
+and fg- colors is bad the fg will be set to white.
+To avoid confusion no prompts will be generated with a red bg.
 
-ulf:ruby.favoptic.com       1;40;35 1;40;34
-root:ruby.favoptic.com      1;41;35 1;41;34
+"""
 
 
-ulf:lembit.favoptic.com     1;40;31 1;40;33
-root:lembit.favoptic.com    1;41;31 1;41;33
+from hashlib import md5
+import getpass
+import socket
+import re
+import sys
 
-ulf:lensbuddy.com           1;40;33 1;40;33
-root:lensbuddy.com          1;41;33 1;41;33
-lensbuddy:lensbuddy.com     1;46;33 1;40;33
+# According to my subjective check and the current setup of xtem-colors, the
+# following combinations is disallowed because they give a poor visual
+# impression. View the combinations with ./rainbow.
+bad_combinations = [
+        '1;41;31',
+        '1;41;35',
+        '1;42;32',
+        '1;42;36',
+        '1;43;33',
+        '1;43;37',
+        '1;44;34',
+        '1;45;31',
+        '1;45;35',
+        '1;46;32',
+        '1;46;36',
+        '1;47;33',
+        '1;47;37',
+]
 
-ulf:purple.favoptic.com     1;40;35 1;40;33
-root:purple.favoptic.com    1;41;35 1;41;33
+def add_root_color(row):
+    # Make the root-background red
+    row['bg1root'] = '1'
+    row['fg1root'] = row['fg1']
+    if '1;4%s;3%s'%(row['bg1root'],row['fg1root']) in bad_combinations:
+        row['fg1root'] = '7'
+    row['col1root'] = '1;4%s;3%s'%(row['bg1root'], row['fg1root'])
 
-ulf:fav-test.favoptic.com   1;40;36 1;40;33
-root:fav-test.favoptic.com  1;41;36 1;41;33
-ulf:fav-test.favoptic.se    1;40;36 1;40;33
-root:fav-test.favoptic.se   1;41;36 1;41;33
+    # Keep the col2 settings for root
+    row['col2root'] = row['col2']
 
-ulf:titanic.favoptic.com    1;40;37 1;40;33
-root:titanic.favoptic.com   1;41;37 1;41;33
+def predefined_colors():
+    the_predefined_list = """
+        # My local workstations (always blue path)
+        ulf:gunde                   1;40;33 1;40;34
+        ulf:mogren                  1;40;32 1;40;34
+        ulf:kalla                   1;40;36 1;40;34
+        ulf:emil                    1;40;30 1;40;34
 
-ulf:Master.secured          1;40;31 1;40;31
-root:Master.secured         1;41;30 1;41;30
+        # other
+        ulf:db.lensbuddy.com        1;40;33 1;40;33
 
-ulf:serv1u.favoptic.com     1;42;31 1;40;33
-root:serv1u.favoptic.com    1;45;33 1;45;33
+        ulf:www3                    1;46;31 1;40;31
+        ulf:www4                    1;46;33 1;40;31
+        ulf:aid3                    1;46;33 1;40;31
+        ulf:sync3                   1;43;34 1;40;31
 
-# Comuters at pio
-ulf:fav-www1.favoptic.com   1;46;30 1;40;31
-root:fav-www1.favoptic.com  1;41;30 1;40;31
+        ulf:fritz                   1;40;36 1;40;35
+        ulf:plattis                 1;40;34 1;40;33
+        ulf:plex                    1;40;32 1;40;33
+        """
+    rows = [x.strip() for x in the_predefined_list.split('\n') if x.strip()]
+    pat = re.compile('''
+            (?P<q>(?P<uname>\w*):(?P<host>\S*))[ ]+
+            (?P<col1>\d;\d(?P<bg1>\d);\d(?P<fg1>\d))  # The first color combination
+            [ ]                                       # Sepatator beetwen col1 and col2
+            (?P<col2>\d;\d(?P<bg2>\d);\d(?P<fg2>\d))  # The second color combination
+            ''', re.VERBOSE)
+    data = []
+    for row in rows:
+        m = pat.match(row)
+        if m:
+            data.append(m.groupdict())
 
-ulf:www3.favoptic.com       1;46;31 1;40;31
-root:www3.favoptic.com      1;41;32 1;40;31
+    for row in data:
+        add_root_color(row)
 
-ulf:fav-aid1.favoptic.com   1;46;33 1;40;31
-root:fav-aid1.favoptic.com  1;41;33 1;40;31
+    return data
 
-ulf:fav-db1.favoptic.com    1;46;35 1;40;31
-root:fav-db1.favoptic.com   1;41;36 1;40;31
+def generate(name):
+    data = {'q': name}
+    off = 1
+    for i in [1,2]:
+        if i==2:
+            # Always make the color2 background black.
+            bg = 0
+        else:
+            bg = int(str(oct(int(md5(name).hexdigest(),16)))[off])
+            off +=1
+            # Do not allow red background
+            while bg == 1 and off<20:
+                bg = int(str(oct(int(md5(name).hexdigest(),16)))[off])
+                off +=1
 
-ulf:fav-db2.favoptic.com    1;46;37 1;40;31
-root:fav-db2.favoptic.com   1;41;37 1;40;31
+            fg = int(str(oct(int(md5(name).hexdigest(),16)))[off])
+            off +=1
+            # Make sure to use a colorcombination that is sound
+            while '1;4%s;3%s'%(bg,fg) in bad_combinations and off<20:
+                fg = int(str(oct(int(md5(name).hexdigest(),16)))[off])
+                off +=1
 
-ulf:sync3.favoptic.com      1;43;34 1;40;31
-root:sync3.favoptic.com     1;41;34 1;40;31
+        data.update({
+            'col%s'%i: '1;4%s;3%s'%(bg,fg),
+            'bg%s'%i: str(bg),
+            'fg%s'%i: str(fg)})
 
-ulf:fritz                   1;40;36 1;40;35
-root:fritz                  1;41;36 1;41;33
-                            
-ulf:plattis                 1;40;34 1;40;33
-root:plattis                1;41;34 1;41;33
-                            
-ulf:plex                    1;40;32 1;40;33
-root:plex                   1;41;32 1;41;33
+    add_root_color(data)
+    return data
+
+def test_colors(data):
+    prompt = '\x1b[%sm%s@hostname\x1b[0m:\x1b[%sm/var/log(0)\x1b[0m$    '
+    tmpl = prompt + prompt + '%s'
+    print tmpl % (
+            data['col1'], 'user', data['col2'],
+            data['col1root'], 'root', data['col2root'],
+            data['q'])
+
+def handle_cmd_line():
+    """Take care of cammandline options and args.
+    """
+    from optparse import OptionParser
+
+    parser = OptionParser()
+
+    parser.add_option('-d', '--debug', action='store_true', default=False,
+            help='Print and test a bunch of prompt-variants')
+    parser.add_option('-u', '--user', default=getpass.getuser(),
+            help='The user. This defaults to the current user (%default)')
+    parser.add_option('-n', '--hostname', default=socket.gethostname(),
+            help='The host. This defaults to the current host (%default)')
+    parser.add_option('--bw', action='store_true', default=False,
+            help='Use the black-and-white old default prompt. Note that the '
+                 'root prompt will be white-on-red.')
+    parser.add_option('-c', type='int',
+            help='The number of the color (should be 1 or 2)')
+
+    (options, args) = parser.parse_args()
+
+    if not options.debug and options.c not in [1, 2]:
+        parser.error('Only 1 or 2 are valid color-ids')
+
+    return options, args
+
+if __name__ == '__main__':
+    options, args = handle_cmd_line()
+
+    # The old default black-and-white colors
+    old_default = { 'q': 'old-default',
+                    'col1': '1;47;30',
+                    'col2': '1;40;37',
+                    'col1root': '1;41;37',
+                    'col2root': '1;40;37'}
+    if options.debug:
+        print options
+        print "== The predefined colors ==============================="
+        for row in predefined_colors():
+            test_colors(row)
+        print "== The colors generated from the input on commandline =="
+        for word in args:
+            test_colors(generate(word))
+        print "== The colors generated from the stdin input ==========="
+        if not sys.stdin.isatty():
+            for line in sys.stdin:
+                for word in line.split(' '):
+                    word = word.strip()
+                    if word:
+                        test_colors(generate(word))
+        print "== The colors predefined bad-colors ===================="
+        for col in bad_combinations:
+            data = {'q': 'bad_combination "%s"' % col,
+                    'col1': col,
+                    'col2': col,
+                    'col1root': col,
+                    'col2root': col}
+            test_colors(data)
+        print "== The old-default promt-colors ========================"
+        test_colors(old_default)
+
+    else:
+        row = None
+        if options.bw:
+            row = old_default
+        else:
+            for row in predefined_colors():
+                if options.user == row['uname'] and options.hostname == row['host']:
+                    print row['col%s'%options.c]
+                    sys.exit(0)
+                elif options.user == 'root' and options.hostname == row['host']:
+                    print row['col%sroot'%options.c]
+                    sys.exit(0)
+            row = None
+        if not row:
+            row = generate(options.hostname)
+        if options.user == 'root':
+            print row['col%sroot'%options.c]
+        else:
+            print row['col%s'%options.c]

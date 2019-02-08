@@ -12,9 +12,11 @@ shopt -s no_empty_cmd_completion
 shopt -s xpg_echo
 shopt -s execfail
 
-PATH="/usr/local/bin:/usr/bin:/bin"
+# Start with /home/ulf/bin to make my own definitions (in bin/) take precedence
+# over those defined by the system.
+PATH="/home/ulf/bin"  # Do not rely on ~ (see: http://stackoverflow.com/q/32199176/42580)
+PATH="${PATH}:/usr/local/bin:/usr/bin:/bin"
 PATH="${PATH}:/usr/bin/X11:/usr/games"
-PATH="${PATH}:/home/ulf/bin"  # Do not rely on ~ (see: http://stackoverflow.com/q/32199176/42580)
 PATH="${PATH}:/home/ulf/.gem/ruby/1.8/bin"
 
 export PATH="${PATH}:/sbin:/usr/sbin"
@@ -34,14 +36,9 @@ export PYTHONPATH='/storage/_favoptic/modules'
 # Needed by ~/.vim/plugin/gnupg.vim
 export GPG_TTY=`tty`
 
-# Get colorization from the file .PS_COL 
-PS_COL1=$(grep $(id -un):$(hostname -f) ~/.PS_COL | awk '{print $2}')
-PS_COL2=$(grep $(id -un):$(hostname -f) ~/.PS_COL | awk '{print $3}')
-
-# If no color is specified use thise defaults
-if [ -z "$PS_COL1" -a $(id -un) = 'root' ]; then PS_COL1="1;41;37"; fi
-if [ -z $PS_COL1 ]; then PS_COL1="1;47;30"; fi
-if [ -z $PS_COL2 ]; then PS_COL2="1;40;37"; fi
+# Get colorization from the file .PS_COL
+PS_COL1=$(~/.PS_COL -c1)
+PS_COL2=$(~/.PS_COL -c2)
 
 function venv_info()
 {
@@ -99,6 +96,9 @@ alias lp='PROMPT_COMMAND=longprompt'
 alias kf="kill \`ps | grep firefox-bin | grep -v grep | awk '{print \$1}'\`"
 alias gqview='echo "Run geegie instead"'
 alias grep='grep --color'
+# Help me add an agent when I log in from home or elsewere.
+alias ssh-add-agent='eval `ssh-agent`;ssh-add'
+alias sshaa=ssh-add-agent
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
