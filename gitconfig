@@ -20,3 +20,5 @@
     ;   $ git dlog --stat
     ;   $ git dlog -p
     dlog = "!sh -c 'echo -----------------------------------------; echo Uncomitted to main svn-repo ; echo -----------------------------------------; git log HEAD~`git svn dcommit -n | grep diff | wc -l`.. $@'" -
+[push]
+	default = simple
