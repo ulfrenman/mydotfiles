@@ -11,6 +11,11 @@ awesome-client:
  * Use return instead of print:
     return "HelloWorld"
 
+volume-control:
+ * This module needs to be downloaded as:
+    cd ~/.config/awesome
+    git clone https://github.com/deficient/volume-control.git
+
 Todo:
  * If there is more than 1 screen, make first tag on screen 1 IM tag with
    floating layout
