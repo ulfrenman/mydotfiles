@@ -12,7 +12,7 @@ dotfiles:
 	ln -sfn ${CURDIR}/bashrc   ~/.bashrc
 	ln -sfn ${CURDIR}/screenrc ~/.screenrc
 	ln -sfn ${CURDIR}/Xdefaults ~/.Xdefaults
-	ln -sfn ${CURDIR}/Xdefaults ~/.Xresources
+	ln -sfn ${CURDIR}/Xresources ~/.Xresources
 	ln -sfn ${CURDIR}/gitconfig ~/.gitconfig
 	ln -sfn ${CURDIR}/psqlrc ~/.psqlrc
 	ln -sfn ${CURDIR}/xprofile ~/.xprofile
