@@ -99,6 +99,8 @@ alias grep='grep --color'
 # Help me add an agent when I log in from home or elsewere.
 alias ssh-add-agent='eval `ssh-agent`;ssh-add'
 alias sshaa=ssh-add-agent
+# Shorthand for parallel-ssh
+alias pssh='parallel-ssh -i -h ~/allhosts.txt'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

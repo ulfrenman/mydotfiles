@@ -7,6 +7,13 @@ Nice links:
  * https://awesomewm.org/apidoc/documentation/17-porting-tips.md.html
  * http://www.holgerschurig.de/tags/awesome/
 
+Help:
+ * https://github.com/streetturtle/awesome-wm-widgets/tree/master/cpu-widget
+   This is a simple cpu-widget with wery understandable code! In the
+   parent-directory there is plenty of other useful widgets, information and
+   code-examples.
+ * https://awesomewm.org/doc/api/classes/client.html
+
 awesome-client:
  * Use return instead of print:
     return "HelloWorld"
@@ -27,3 +34,8 @@ Todo:
      https://awesomewm.org/doc/api/documentation/17-porting-tips.md.html
  * Learn how to use awesome-client
  * Learn some Lua
+ * Look at https://awesomewm.org/doc/api/classes/wibox.widget.calendar.html
+   and try to make it popup when klicking the clock at the top. Possible with
+   prev- next-buttons.
+ * How can I on the commandline fire up a notification-box or put something in
+   the systray (with optional color).
