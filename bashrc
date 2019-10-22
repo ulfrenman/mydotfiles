@@ -15,11 +15,15 @@ shopt -s execfail
 # Start with /home/ulf/bin to make my own definitions (in bin/) take precedence
 # over those defined by the system.
 PATH="/home/ulf/bin"  # Do not rely on ~ (see: http://stackoverflow.com/q/32199176/42580)
-PATH="${PATH}:/usr/local/bin:/usr/bin:/bin"
-PATH="${PATH}:/usr/bin/X11:/usr/games"
 PATH="${PATH}:/home/ulf/.gem/ruby/1.8/bin"
+PATH="${PATH}:/usr/local/sbin:/usr/local/bin"
+PATH="${PATH}:/usr/sbin:/usr/bin"
+PATH="${PATH}:/sbin:/bin"
+PATH="${PATH}:/usr/games:/usr/local/games"
+PATH="${PATH}:/usr/bin/X11"
+PATH="${PATH}:/usr/NX/bin"
+export PATH="${PATH}"
 
-export PATH="${PATH}:/sbin:/usr/sbin"
 export HISTIGNORE=" *:&"
 # HISTTIMEFORMAT seems like a nice thing:
 #   http://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/

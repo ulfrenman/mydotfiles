@@ -18,11 +18,17 @@ require("awful.hotkeys_popup.keys")
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
--- volume-control widget: https://github.com/deficient/volume-control
-local volume_control = require("volume-control")
--- define your volume control, using default settings:
-volumecfg = volume_control({})
+---------------------------------------------------------------------------
+-- Modules:
+--   https://github.com/deficient/
+--   https://github.com/streetturtle/awesome-wm-widgets
+local volumecfg = require("volume-control") {}
+local battery_widget = require("battery-widget") {}
+local cpuinfo_widget = require("cpuinfo") {}
 
+-- A slitter to use
+splitter = wibox.widget.textbox()
+splitter:set_markup('<span color="#f4f"> | </span>')
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -244,7 +250,11 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             volumecfg.widget,
-            mykeyboardlayout,
+            splitter,
+            battery_widget,
+            splitter,
+            cpuinfo_widget.widget, -- momentary load on each core
+            --mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
