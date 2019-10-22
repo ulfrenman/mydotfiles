@@ -1,8 +1,7 @@
-install: submodules update_modules dotfiles vim
+install: submodules dotfiles vim
 
 submodules:
-	git submodule init
-	git submodule update
+	git submodule update --init --recursive
 
 vim:
 	make -C myvim
@@ -18,6 +17,3 @@ dotfiles:
 	ln -sfn ${CURDIR}/xprofile ~/.xprofile
 	# Only insert awesome-link if .config exist
 	if [ -d ~/.config ]; then ln -sfn ${CURDIR}/awesome ~/.config/.; fi
-
-update_modules:
-	git submodule foreach git pull origin master

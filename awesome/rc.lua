@@ -253,7 +253,7 @@ awful.screen.connect_for_each_screen(function(s)
             splitter,
             battery_widget,
             splitter,
-            cpuinfo_widget.widget,
+            cpuinfo_widget.widget, -- momentary load on each core
             --mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
