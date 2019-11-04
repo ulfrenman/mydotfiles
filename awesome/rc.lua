@@ -25,6 +25,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 local volumecfg = require("volume-control") {}
 local battery_widget = require("battery-widget") {}
 local cpuinfo_widget = require("cpuinfo") {}
+local tempgraph = require("tempgraph")
 
 -- A slitter to use
 splitter = wibox.widget.textbox()
@@ -257,6 +258,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            tempgraph({timeout = 2, test_spike = true}),
+            splitter,
             volumecfg.widget,
             splitter,
             battery_widget,
