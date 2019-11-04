@@ -61,6 +61,14 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 -- Instead of customizing a full theme I just tweek whats interesting to me.
 beautiful.border_normal = "#6060aa"
 beautiful.border_focus = "#dddddd"
+-- Get better colors for the tooltips
+beautiful.tooltip_bg = "#cccccc"
+beautiful.tooltip_fg = "#000000"
+-- Make hotkeys_popup easier to read by bigger font and brighter colors
+beautiful.hotkeys_fg = "#ffffff"
+beautiful.hotkeys_modifiers_fg = "#88aa88"
+beautiful.hotkeys_font = "Monospace Bold 12"
+beautiful.hotkeys_description_font = "Monospace 10"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
