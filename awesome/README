@@ -13,6 +13,8 @@ Help:
    parent-directory there is plenty of other useful widgets, information and
    code-examples.
  * https://awesomewm.org/doc/api/classes/client.html
+ * https://www.reddit.com/r/awesomewm/comments/6cwevs/the_purpose_of_run_lua_code/dhyi71h/
+
 
 awesome-client:
  * Use return instead of print:
