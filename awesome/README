@@ -41,3 +41,8 @@ Todo:
    prev- next-buttons.
  * How can I on the commandline fire up a notification-box or put something in
    the systray (with optional color).
+ * Make screen order depend on the physical order of the screens. This seems
+   to be "random" at the moment so moving client to the next screen
+   (move_to_screen()) is not always the same as moving it to the next monitor
+   to the right. This is confusing. Try to use "swap()" during initialization
+   (rc.lua) to set this up!
