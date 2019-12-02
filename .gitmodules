@@ -1,6 +1,6 @@
 [submodule "myvim"]
 	path = myvim
-	url = git@github.com:ulfrenman/myvim.git
+	url = https://github.com/ulfrenman/myvim.git
 [submodule "awesome/volume-control"]
 	path = awesome/volume-control
 	url = https://github.com/deficient/volume-control.git
@@ -12,4 +12,4 @@
 	url = https://github.com/deficient/cpuinfo.git
 [submodule "awesome/testing/awmtt"]
 	path = awesome/testing/awmtt
-	url = http://github.com/serialoverflow/awmtt.git
+	url = https://github.com/serialoverflow/awmtt.git
