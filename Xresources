@@ -1,4 +1,4 @@
 # My new Xps 13 has a HiRes-monitor. Scale down the whole UI-thing when using
 # awesome to get readable size on everything. See:
 #   https://wiki.archlinux.org/index.php/HiDPI#X_Resources
-Xft.dpi: 200
+#Xft.dpi: 200

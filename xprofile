@@ -13,14 +13,50 @@ echo "# Generated from ~/.xprofile" >> ~/.ssh-agent
 # För att få lite fart på tangentbordet
 xset r rate 300 50
 
+
+# To set mouse to go faster I use:
+#     xinput --set-prop 10 'libinput Accel Speed' 1
+# The default value was 0 and by trial-and-error I concluded 1 was a good
+# value.
+#
+# To figure out device name/id I use:
+#     xinput list
+#
+# See current settings for the device with something like this:
+#     xinput list-props 10
+#     xinput list-props 14
+#     xinput list-props 'DELL08AF:00 06CB:76AF Touchpad'
+
+X=$(xinput list --name-only | grep '^USB Optical Mouse$')
+if [[ ! -z $X ]]; then
+    echo Speedup of regular mouse
+    xinput --set-prop "$X" 'libinput Accel Speed' 1
+fi
+
+X=$(xinput list --name-only | grep '^DELL.*Touchpad$')
+if [[ ! -z $X ]]; then
+    echo Speedup of laptop touchpad
+    xinput --set-prop "$X" 'libinput Accel Speed' 1
+fi
+
 # Jag har två skärmar. På detta sätt sätter jag dom i rätt ordning
 #xrandr --output VGA-1 --mode 1280x1024 --right-of HDMI-1
 
+xrandr --output eDP-1 --mode 1920x1080 &
+
 # Starta screensaver demonen
 xscreensaver -nosplash &
+
+# Start NetworkManager applet. It will be placed in the systray. Send all
+# output to /dev/null since there is some bug producing lots of error-messages:
+#   https://bugs.launchpad.net/ubuntu/+source/network-manager-applet/+bug/1799213
+nm-applet >/dev/null 2>&1 &
 
 # Start things
 #google-chrome &
 #psi-plus --status=online &
 #volumeicon &
 #indicator-sound-switcher &
+
+vboxmanage startvm kalla2 --type headless &
+vboxmanage startvm kam-db --type headless &

@@ -10,3 +10,6 @@
 [submodule "awesome/cpuinfo"]
 	path = awesome/cpuinfo
 	url = https://github.com/deficient/cpuinfo.git
+[submodule "awesome/testing/awmtt"]
+	path = awesome/testing/awmtt
+	url = http://github.com/serialoverflow/awmtt.git

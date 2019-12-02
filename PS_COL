@@ -64,8 +64,9 @@ def predefined_colors():
         # My local workstations (always blue path)
         ulf:gunde                   1;40;33 1;40;34
         ulf:mogren                  1;40;32 1;40;34
-        ulf:kalla                   1;40;36 1;40;34
+        ulf:kalla                   1;40;36 1;40;35
         ulf:emil                    1;40;30 1;40;34
+        ulf:karbin                  1;40;35 1;40;36
 
         # other
         ulf:db.lensbuddy.com        1;40;33 1;40;33

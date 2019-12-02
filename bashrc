@@ -39,6 +39,11 @@ export SVNBRANCH='svn+ssh://svn.lensbuddy.se/opt/subversion/main/branches'
 export PYTHONPATH='/storage/_favoptic/modules'
 # Needed by ~/.vim/plugin/gnupg.vim
 export GPG_TTY=`tty`
+# I run no postgres locally by have portforvard setup in virtualbox so I can
+# connect to localhost and automagically end up on the db-machine. But to
+# avoid having to specify localhot to psql PGHOST is defined.
+export PGHOST=localhost
+
 
 # Get colorization from the file .PS_COL
 PS_COL1=$(~/.PS_COL -c1)
@@ -104,7 +109,7 @@ alias grep='grep --color'
 alias ssh-add-agent='eval `ssh-agent`;ssh-add'
 alias sshaa=ssh-add-agent
 # Shorthand for parallel-ssh
-alias pssh='parallel-ssh -i -h ~/allhosts.txt'
+alias pssh='parallel-ssh -i -t 10 -h ~/allhosts.txt'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
