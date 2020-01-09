@@ -75,6 +75,8 @@ def predefined_colors():
         ulf:www4                    1;46;33 1;40;31
         ulf:aid3                    1;46;33 1;40;31
         ulf:sync3                   1;43;34 1;40;31
+        ulf:fof1                    1;43;35 1;40;35
+        ulf:fof2                    1;43;36 1;40;35
 
         ulf:fritz                   1;40;36 1;40;35
         ulf:plattis                 1;40;34 1;40;33
