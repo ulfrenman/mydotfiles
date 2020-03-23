@@ -22,7 +22,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- Modules:
 --   https://github.com/deficient/
 --   https://github.com/streetturtle/awesome-wm-widgets
-local volumecfg = require("volume-control") {}
+--local volumecfg = require("volume-control") {}
 local battery_widget = require("battery-widget") {}
 local cpuinfo_widget = require("cpuinfo") {}
 local tempgraph = require("tempgraph")
@@ -260,7 +260,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             tempgraph({timeout = 2, test_spike = true}),
             splitter,
-            volumecfg.widget,
+            --volumecfg.widget,
             splitter,
             battery_widget,
             splitter,
@@ -415,9 +415,9 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop", false) end),
 
     -- Volume controls
-    awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
-    awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
-    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
+    awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("/usr/bin/pulseaudio-ctl up", false) end),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("/usr/bin/pulseaudio-ctl down", false) end),
+    awful.key({}, "XF86AudioMute",        function() awful.util.spawn("/usr/bin/pulseaudio-ctl mute", false) end),
 
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
