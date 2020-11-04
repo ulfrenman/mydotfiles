@@ -24,10 +24,21 @@ PATH="${PATH}:/usr/bin/X11"
 PATH="${PATH}:/usr/NX/bin"
 export PATH="${PATH}"
 
+#==== HISTORY ===========
 export HISTIGNORE=" *:&"
 # HISTTIMEFORMAT seems like a nice thing:
 #   http://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/
 export HISTTIMEFORMAT='%F %T: '
+# Avoid duplicates
+#   https://unix.stackexchange.com/a/1292/26152
+export HISTCONTROL=ignoredups:erasedups
+# Bigger history
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+# To write all terminal history to the same file always the command
+# "history -a" has been added to PROMPT_COMMAND later in this file.
+#   https://askubuntu.com/a/80380/31749
+#==== HISTORY = END ==========
 
 export PAGER=`which less`
 export EDITOR=`which vim`
@@ -91,7 +102,7 @@ function title()
   echo -n -e "\e]0;$*\007";
 }
 
-PROMPT_COMMAND=longprompt
+PROMPT_COMMAND="longprompt; history -a"
 
 if [ 'xterm' == $TERM ]; then title "/// ${HOSTNAME} ///"; fi
 
@@ -100,16 +111,14 @@ if [ 'screen' == $TERM ]; then PROMPT_COMMAND=screenprompt; fi
 alias ls='ls --color=auto'
 alias dir='ls --color=auto -alF'
 alias ps='ps -elFH'
-alias sp='PROMPT_COMMAND=shortprompt'
-alias lp='PROMPT_COMMAND=longprompt'
+alias sp='PROMPT_COMMAND="shortprompt; history -a"'
+alias lp='PROMPT_COMMAND="longprompt; history -a"'
 alias kf="kill \`ps | grep firefox-bin | grep -v grep | awk '{print \$1}'\`"
 alias gqview='echo "Run geegie instead"'
 alias grep='grep --color'
 # Help me add an agent when I log in from home or elsewere.
 alias ssh-add-agent='eval `ssh-agent`;ssh-add'
 alias sshaa=ssh-add-agent
-# Shorthand for parallel-ssh
-alias pssh='parallel-ssh -i -t 10 -h ~/allhosts.txt'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

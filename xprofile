@@ -58,5 +58,5 @@ nm-applet >/dev/null 2>&1 &
 #volumeicon &
 #indicator-sound-switcher &
 
-vboxmanage startvm kalla2 --type headless &
-vboxmanage startvm kam-db --type headless &
+#vboxmanage startvm kalla2 --type headless &
+#vboxmanage startvm kam-db --type headless &
