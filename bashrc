@@ -110,6 +110,7 @@ if [ 'screen' == $TERM ]; then PROMPT_COMMAND=screenprompt; fi
 
 alias ls='ls --color=auto'
 alias dir='ls --color=auto -alF'
+alias ip='ip -c'
 alias ps='ps -elFH'
 alias sp='PROMPT_COMMAND="shortprompt; history -a"'
 alias lp='PROMPT_COMMAND="longprompt; history -a"'

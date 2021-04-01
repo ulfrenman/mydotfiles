@@ -42,10 +42,13 @@ fi
 # Jag har två skärmar. På detta sätt sätter jag dom i rätt ordning
 #xrandr --output VGA-1 --mode 1280x1024 --right-of HDMI-1
 
-xrandr --output eDP-1 --mode 1920x1080 &
+#xrandr --output eDP-1 --mode 1920x1080 &
+autorandr -c
 
 # Starta screensaver demonen
-xscreensaver -nosplash &
+#xscreensaver -nosplash &
+# Do this with systemd instead. See:
+# https://www.linuxbabe.com/ubuntu/install-autostart-xscreensaver-ubuntu-18-04-19-04
 
 # Start NetworkManager applet. It will be placed in the systray. Send all
 # output to /dev/null since there is some bug producing lots of error-messages:
