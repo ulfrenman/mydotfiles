@@ -133,10 +133,10 @@ def generate(name):
 def test_colors(data):
     prompt = '\x1b[%sm%s@hostname\x1b[0m:\x1b[%sm/var/log(0)\x1b[0m$    '
     tmpl = prompt + prompt + '%s'
-    print tmpl % (
+    print(tmpl % (
             data['col1'], 'user', data['col2'],
             data['col1root'], 'root', data['col2root'],
-            data['q'])
+            data['q']))
 
 def handle_cmd_line():
     """Take care of cammandline options and args.
@@ -174,21 +174,21 @@ if __name__ == '__main__':
                     'col1root': '1;41;37',
                     'col2root': '1;40;37'}
     if options.debug:
-        print options
-        print "== The predefined colors ==============================="
+        print(options)
+        print("== The predefined colors ===============================")
         for row in predefined_colors():
             test_colors(row)
-        print "== The colors generated from the input on commandline =="
+        print("== The colors generated from the input on commandline ==")
         for word in args:
             test_colors(generate(word))
-        print "== The colors generated from the stdin input ==========="
+        print("== The colors generated from the stdin input ===========")
         if not sys.stdin.isatty():
             for line in sys.stdin:
                 for word in line.split(' '):
                     word = word.strip()
                     if word:
                         test_colors(generate(word))
-        print "== The colors predefined bad-colors ===================="
+        print("== The colors predefined bad-colors ====================")
         for col in bad_combinations:
             data = {'q': 'bad_combination "%s"' % col,
                     'col1': col,
@@ -196,7 +196,7 @@ if __name__ == '__main__':
                     'col1root': col,
                     'col2root': col}
             test_colors(data)
-        print "== The old-default promt-colors ========================"
+        print("== The old-default promt-colors ========================")
         test_colors(old_default)
 
     else:
@@ -206,15 +206,15 @@ if __name__ == '__main__':
         else:
             for row in predefined_colors():
                 if options.user == row['uname'] and options.hostname == row['host']:
-                    print row['col%s'%options.c]
+                    print(row['col%s'%options.c])
                     sys.exit(0)
                 elif options.user == 'root' and options.hostname == row['host']:
-                    print row['col%sroot'%options.c]
+                    print(row['col%sroot'%options.c])
                     sys.exit(0)
             row = None
         if not row:
             row = generate(options.hostname)
         if options.user == 'root':
-            print row['col%sroot'%options.c]
+            print(row['col%sroot'%options.c])
         else:
-            print row['col%s'%options.c]
+            print(row['col%s'%options.c])
