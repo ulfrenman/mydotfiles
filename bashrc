@@ -46,8 +46,8 @@ export G_BROKEN_FILENAMES=1
 export PS_FORMAT="pid,euser,stat,bsdtime,vsz,sz,command"
 export SVNTRUNK='svn+ssh://svn.lensbuddy.se/opt/subversion/main/trunk'
 export SVNBRANCH='svn+ssh://svn.lensbuddy.se/opt/subversion/main/branches'
-#export PYTHONPATH='/home/ulf/gitcopy/modules'
-export PYTHONPATH='/storage/_favoptic/modules'
+# Instead of PYTHONPATH we specify this in a .pth-file instead.
+#export PYTHONPATH='/storage/_favoptic/modules'
 # Needed by ~/.vim/plugin/gnupg.vim
 export GPG_TTY=`tty`
 # I run no postgres locally by have portforvard setup in virtualbox so I can

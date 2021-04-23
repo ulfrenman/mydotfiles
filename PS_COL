@@ -103,7 +103,7 @@ def predefined_colors():
 def generate(name):
     data = {'q': name}
     name = name.encode()
-    off = 1
+    off = 2
     for i in [1,2]:
         if i==2:
             # Always make the color2 background black.
