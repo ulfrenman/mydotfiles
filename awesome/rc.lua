@@ -22,10 +22,20 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- Modules:
 --   https://github.com/deficient/
 --   https://github.com/streetturtle/awesome-wm-widgets
---local volumecfg = require("volume-control") {}
-local battery_widget = require("battery-widget") {}
-local cpuinfo_widget = require("cpuinfo") {}
-local tempgraph = require("tempgraph")
+local volumecfg = require("volume-control") {}
+local battery_widget = require("battery-widget") {
+    percent_colors = {
+        { 25, "red"   },
+        { 50, "orange"},
+        {999, "#5f5" },
+    },
+}
+--local cpuinfo_widget = require("cpuinfo") {}
+--local tempgraph = require("tempgraph")
+--local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+--local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+--local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+--local cpu_widget_base = require("testing.cpu-widget")
 
 -- A slitter to use
 splitter = wibox.widget.textbox()
@@ -258,13 +268,17 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            tempgraph({timeout = 2, test_spike = true}),
-            splitter,
-            --volumecfg.widget,
+            --tempgraph({timeout = 2, test_spike = true}),
+            --splitter,
+            volumecfg.widget,
+            --cpu_widget_base({ width=20, step_width = 1, step_spacing = 0, }),
             splitter,
             battery_widget,
             splitter,
-            cpuinfo_widget.widget, -- momentary load on each core
+            --cpuinfo_widget.widget, -- momentary load on each core
+            -- default
+            --cpu_widget({step_width=1, step_spacing=0, color='#434c5e'}),
+            --ram_widget(),
             --mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
@@ -415,9 +429,16 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioStop", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop", false) end),
 
     -- Volume controls
-    awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("/usr/bin/pulseaudio-ctl up", false) end),
-    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("/usr/bin/pulseaudio-ctl down", false) end),
-    awful.key({}, "XF86AudioMute",        function() awful.util.spawn("/usr/bin/pulseaudio-ctl mute", false) end),
+    --awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("/usr/bin/pulseaudio-ctl up", false) end),
+    --awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("/usr/bin/pulseaudio-ctl down", false) end),
+    --awful.key({}, "XF86AudioMute",        function() awful.util.spawn("/usr/bin/pulseaudio-ctl mute", false) end),
+    awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("/home/ulf/bin/pulseaudio-helper up", false) end),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("/home/ulf/bin/pulseaudio-helper down", false) end),
+    awful.key({ "Shift" }, "XF86AudioRaiseVolume", function() awful.util.spawn("/home/ulf/bin/pulseaudio-helper -n1 up", false) end),
+    awful.key({ "Shift" }, "XF86AudioLowerVolume", function() awful.util.spawn("/home/ulf/bin/pulseaudio-helper -n1 down", false) end),
+    awful.key({}, "XF86AudioMute",        function() awful.util.spawn("/home/ulf/bin/pulseaudio-helper -m", false) end),
+    -- Or better still: Have a look at a widget and maybe fix it to suit my requrements!
+    --   https://github.com/mokasin/apw
 
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
