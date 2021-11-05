@@ -154,3 +154,11 @@ svn() {
 } 
 export ARDUINO_DIR=/home/ulf/arduino_install/latest
 export ARDMK_DIR=/home/ulf/arduino_install/Arduino-Makefile
+
+# For grc (I initially installed v1.13)
+# To install, use:
+#   git clone https://github.com/garabik/grc
+#   cd grc
+#   sudo ./install.sh
+GRC_ALIASES=true
+[[ -s "/etc/profile.d/grc.sh" ]] && source /etc/profile.d/grc.sh
